@@ -57,6 +57,10 @@ export default {
     'vue-currency-filter/nuxt'
   ],
 
+  axios: {
+    baseURL: process.env.PRAIRIE_WIND_BASE_URL || 'http://localhost:3000'
+  },
+
   router: {
     middleware: 'cart'
   },

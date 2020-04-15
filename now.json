@@ -4,7 +4,8 @@
       "NACELLE_GRAPHQL_TOKEN": "@nacelle_graphql_token",
       "NACELLE_SPACE_ID": "@nacelle_space_id",
       "BUILD_MODE": "@build_mode",
-      "WEATHER_API_KEY": "@weather_api_key"
+      "WEATHER_API_KEY": "@weather_api_key",
+      "PRAIRIE_WIND_BASE_URL": "@prairie_wind_base_url"
     }
   }
 }

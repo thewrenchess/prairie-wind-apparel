@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
     req.connection.socket.remoteAddress
 
   if (ip) {
-    return axios.get('http://api.weatherapi.com/v1/current.json', {
+    return axios.get('https://api.weatherapi.com/v1/current.json', {
       headers: {
         'XContent-Type': 'application/json'
       },

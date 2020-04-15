@@ -7,7 +7,7 @@ export const mutations = {}
 export const actions = {
   async nuxtServerInit(ctx, context) {
     await this.$nacelle.nacelleNuxtServerInit(ctx, context)
-    await context.$axios.$get('/api')
+    await context.$axios.$get('https://prairie-wind-apparel-server.now.sh/api')
       .then(result => {
         ctx.commit('weather/setWeather', result)
       })

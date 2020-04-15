@@ -9,25 +9,16 @@
     </div>
     <div class="column is-5 is-offset-1">
       <product-title :title="product.title" />
-      <!-- <product-add-to-cart-button
-        :product="product"
-        :variant="currentVariant"
-        :allOptionsSelected="true"
-        :onlyOneOption="true"
-        :metafields="[{key:'test', value:'hi'}]"
-      />-->
-      <product-category
-        v-if="product.productType"
-        :category="product.productType"
-      />
+      <product-category v-if="product.productType" :category="product.productType" />
       <p class="price">
-        <product-price v-if="currentVariant" :price="currentVariant.price"  />
+        <product-price v-if="currentVariant" :price="currentVariant.price" />
       </p>
       <product-description :description="product.description" />
       <product-variant-select
         v-if="currentVariant"
         :product="product"
         :variant="currentVariant"
+        :deactivateQuickShop="deactivateQuickShop"
         v-on:variant-selected="onVariantSelected"
       />
     </div>
@@ -35,7 +26,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapGetters, mapActions } from 'vuex'
+import { mapMutations } from 'vuex'
 import ProductCategory from '~/components/nacelle/ProductCategory'
 import ProductMediaSelectView from '~/components/nacelle/ProductMediaSelectView'
 import ProductTitle from '~/components/nacelle/ProductTitle'
@@ -44,14 +35,14 @@ import ProductDescription from '~/components/nacelle/ProductDescription'
 import ProductVariantSelect from '~/components/nacelle/ProductVariantSelect'
 export default {
   components: {
-ProductCategory,
-ProductMediaSelectView,
-ProductTitle,
-ProductPrice,
-ProductDescription,
-ProductVariantSelect
+    ProductCategory,
+    ProductMediaSelectView,
+    ProductTitle,
+    ProductPrice,
+    ProductDescription,
+    ProductVariantSelect
   },
-  data () {
+  data() {
     return {
       selectedVariant: undefined
     }
@@ -60,10 +51,14 @@ ProductVariantSelect
     product: {
       type: Object,
       default: () => {}
+    },
+    deactivateQuickShop: {
+      type: Function,
+      required: false
     }
   },
   computed: {
-    currentVariant () {
+    currentVariant() {
       if (this.selectedVariant) {
         return this.selectedVariant
       } else if (
@@ -79,7 +74,7 @@ ProductVariantSelect
   },
   methods: {
     ...mapMutations('cart', ['showCart']),
-    onVariantSelected ({ selectedVariant }) {
+    onVariantSelected({ selectedVariant }) {
       this.selectedVariant = selectedVariant
     }
   }

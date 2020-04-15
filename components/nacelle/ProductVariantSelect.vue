@@ -19,6 +19,7 @@
           :product="product"
           :variant="selectedVariant"
           :allOptionsSelected="allOptionsSelected"
+          @click.native="onAddToCart"
         />
       </div>
     </div>
@@ -43,6 +44,10 @@ export default {
     showQuantitySelect: {
       type: Boolean,
       default: true
+    },
+    deactivateQuickShop: {
+      type: Function,
+      required: false
     }
   },
   data() {
@@ -72,6 +77,13 @@ export default {
         this.selectedVariant.availableForSale &&
         this.showQuantitySelect
       )
+    }
+  },
+  methods: {
+    onAddToCart() {
+      if (this.deactivateQuickShop) {
+        this.deactivateQuickShop()
+      }
     }
   }
 }

@@ -40,10 +40,10 @@ export default {
     }
   },
   methods: {
-    closeModal () {
+    closeModal() {
       this.$emit('closeModal')
     },
-    clickOuter (e) {
+    clickOuter(e) {
       const { target } = e
 
       if (target === this.$refs.outer) {

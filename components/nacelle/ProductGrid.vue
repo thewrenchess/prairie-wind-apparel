@@ -42,7 +42,7 @@ export default {
     }
   },
   computed: {
-    columnClasses () {
+    columnClasses() {
       let classes = 'column'
 
       if (this.columns === 4) {

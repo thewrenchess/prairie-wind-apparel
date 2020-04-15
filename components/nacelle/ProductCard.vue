@@ -10,31 +10,19 @@
       <product-price :price="product.priceRange.max" />
     </div>
     <div v-if="product && product.id" class="product-card-actions">
-      <quantity-selector :quantity.sync="quantity" />
-      <product-add-to-cart-button
-        v-if="showAddToCart == true"
-        :product="product"
-        :variant="currentVariant"
-        :allOptionsSelected="allOptionsSelected"
-        :confirmedSelection="confirmedSelection"
-        @click.native="handleAddToCartClick"
-        :onlyOneOption="onlyOneOption"
-        :quantity="quantity"
-      ></product-add-to-cart-button>
+      <button
+        @click.prevent="activateQuickShop"
+        class="button is-primary nacelle"
+      >
+        Quick Shop
+      </button>
       <interface-modal
         :modalOpen="optionsModalVisible"
         v-on:closeModal="optionsModalVisible = false"
       >
-        <h3 class="modal-title">Choose Your Options</h3>
-        <product-options
-          :options="allOptions"
-          v-on:selectedOptionsSet="setSelected"
-          v-on:confirmedSelection="
-            ;(confirmedSelection = true), (optionsModalVisible = false)
-          "
-          :onlyOneOption="onlyOneOption"
-          :variant="currentVariant"
-          :variants="product.variants"
+        <product-details
+          :product="product"
+          :deactivateQuickShop="deactivateQuickShop"
         />
       </interface-modal>
     </div>
@@ -46,24 +34,18 @@ import { mapState, mapMutations, mapActions, mapGetters } from 'vuex'
 import ProductImage from '~/components/nacelle/ProductImage'
 import ProductTitle from '~/components/nacelle/ProductTitle'
 import ProductPrice from '~/components/nacelle/ProductPrice'
-import QuantitySelector from '~/components/nacelle/QuantitySelector'
-import ProductAddToCartButton from '~/components/nacelle/ProductAddToCartButton'
 import InterfaceModal from '~/components/nacelle/InterfaceModal'
-import ProductOptions from '~/components/nacelle/ProductOptions'
-import CartFlyoutItem from '~/components/nacelle/CartFlyoutItem'
 import allOptionsSelected from '~/mixins/allOptionsSelected'
 import availableOptions from '~/mixins/availableOptions'
+import ProductDetails from '~/components/nacelle/ProductDetails'
 
 export default {
   components: {
     ProductImage,
     ProductTitle,
     ProductPrice,
-    QuantitySelector,
-    ProductAddToCartButton,
     InterfaceModal,
-    ProductOptions,
-    CartFlyoutItem
+    ProductDetails
   },
   mixins: [allOptionsSelected, availableOptions],
   props: {
@@ -181,10 +163,11 @@ export default {
   methods: {
     ...mapMutations('cart', ['showCart']),
     ...mapActions('events', ['productView']),
-    handleAddToCartClick() {
-      if (!this.allOptionsSelected) {
-        this.optionsModalVisible = true
-      }
+    activateQuickShop() {
+      this.optionsModalVisible = true
+    },
+    deactivateQuickShop() {
+      this.optionsModalVisible = false
     }
   }
 }

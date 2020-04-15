@@ -1,0 +1,10 @@
+{
+  "build": {
+    "env": {
+      "NACELLE_GRAPHQL_TOKEN": "@nacelle_graphql_token",
+      "NACELLE_SPACE_ID": "@nacelle_space_id",
+      "BUILD_MODE": "@build_mode",
+      "WEATHER_API_KEY": "@weather_api_key"
+    }
+  }
+}

@@ -6,6 +6,13 @@
         <main-nav-burger />
       </div>
 
+      <div
+        v-if="weatherIcon"
+        class="main-nav-weather"
+      >
+        <img :src="weatherIcon" height="50" />
+      </div>
+
       <div class="main-nav-brand">
         <nuxt-link to="/">
           <strong>{{ name }}</strong>
@@ -80,7 +87,7 @@ import SearchBox from '~/components/nacelle/SearchBox'
 import Cart from '~/components/nacelle/Cart'
 import { mapState, mapMutations, mapGetters } from 'vuex'
 export default {
-  components:{
+  components: {
     Cart,
     MainNavCart,
     MainNavBurger,
@@ -95,12 +102,22 @@ export default {
   computed: {
     ...mapState('space', ['id', 'name', 'linklists']),
     ...mapState('menu', ['menuVisible']),
+    ...mapState('weather', ['weather']),
     ...mapGetters('space', ['getLinks']),
     mainMenu() {
       return this.getLinks('main-menu')
     },
     mobileMenu() {
       return this.getLinks('mobile-menu')
+    },
+    weatherIcon() {
+      const condition = this.weather.condition || {}
+      const icon = condition.icon
+      if (!icon) {
+        return icon
+      }
+
+      return `https:${icon}`
     }
   },
   methods: {
@@ -233,5 +250,9 @@ button.main-nav-cart {
   flex-grow: 1;
   padding: 1rem;
   overflow: scroll;
+}
+
+.main-nav-weather img {
+  vertical-align: bottom;
 }
 </style>

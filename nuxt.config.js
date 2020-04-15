@@ -158,5 +158,8 @@ export default {
       }
     },
     transpile: ['@nacelle/nacelle-nuxt-module', '@nacelle/nacelle-tools', 'fuse.js', 'uuidv4']
-  }
+  },
+  serverMiddleware: [
+    '~/api'
+  ]
 }

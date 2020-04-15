@@ -10,7 +10,7 @@
         v-if="weatherIcon"
         class="main-nav-weather"
       >
-        <img :src="weatherIcon" height="50" />
+        <img :src="weatherIcon" />
       </div>
 
       <div class="main-nav-brand">

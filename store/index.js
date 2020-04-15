@@ -11,6 +11,9 @@ export const actions = {
       .then(result => {
         ctx.commit('weather/setWeather', result)
       })
-      .catch(error => console.log('error getting weather', error.message))
+      .catch(error => {
+        console.log(error)
+        console.log('error getting weather', error.message)
+      })
   }
 }
